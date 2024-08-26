@@ -27,6 +27,9 @@ def main():
         # by dividing the value returned from tick by 1000
         dt = clock.tick(60) / 1000
 
+        # update player's rotation/position etc
+        player.update(dt)
+
         # update the screen
         pygame.display.flip()
 
