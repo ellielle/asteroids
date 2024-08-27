@@ -1,5 +1,7 @@
 import pygame
 
+from asteroid import Asteroid
+from asteroidfield import AsteroidField
 from constants import PLAYER_RADIUS, SCREEN_HEIGHT, SCREEN_WIDTH
 from player import Player
 
@@ -13,12 +15,19 @@ def main():
     dt = 0
 
     # sprite groups to make updating all objects easier
+    # sprite group for asteroids
+    asteroids = pygame.sprite.Group()
+
+    # player & asteroid sprite groups for updating and drawing
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     Player.containers = (updatable, drawable)
+    Asteroid.containers = (asteroids, updatable, drawable)
+    AsteroidField.containers = (updatable)
 
     # instantiate player object
     player = Player(x=SCREEN_WIDTH/2, y=SCREEN_HEIGHT/2, radius=PLAYER_RADIUS)
+    astrofield = AsteroidField()
 
     while True:
         # Allows the close button to close the game and not hang
