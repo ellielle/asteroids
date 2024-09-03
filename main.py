@@ -59,7 +59,7 @@ def main():
                 sys.exit(0)
             for b in bullets:
                 if a.collide(b):
-                    a.kill()
+                    a.split()
                     b.kill()
 
         # update the screen
