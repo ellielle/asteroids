@@ -24,10 +24,11 @@ def main():
     # player & asteroid sprite groups for updating and drawing
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
+    bullets = pygame.sprite.Group()
     Player.containers = (updatable, drawable)
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = updatable
-    Shot.containers = (updatable, drawable)
+    Shot.containers = (bullets, updatable, drawable)
 
     # instantiate player object
     player = Player(x=SCREEN_WIDTH / 2, y=SCREEN_HEIGHT / 2, radius=PLAYER_RADIUS)
@@ -56,6 +57,10 @@ def main():
             if a.collide(player):
                 print("Game over!")
                 sys.exit(0)
+            for b in bullets:
+                if a.collide(b):
+                    a.kill()
+                    b.kill()
 
         # update the screen
         pygame.display.flip()
